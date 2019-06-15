@@ -1,0 +1,29 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.3.31'
+}
+
+group 'y2.virtualui'
+version '0.1'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7"
+
+	compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.7"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.7"
+}
+
+jar {
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
